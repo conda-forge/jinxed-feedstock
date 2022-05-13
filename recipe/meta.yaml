@@ -1,5 +1,5 @@
 {% set name = "jinxed" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d8f1731f134e9e6b04d95095845ae6c10eb15cb223a5f0cabdea87d4a279c305
+  sha256: 032acda92d5c57cd216033cbbd53de731e6ed50deb63eb4781336ca55f72cda5
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
