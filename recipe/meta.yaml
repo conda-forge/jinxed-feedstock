@@ -11,16 +11,20 @@ source:
   sha256: d8f1731f134e9e6b04d95095845ae6c10eb15cb223a5f0cabdea87d4a279c305
 
 build:
-  number: 2
+  number: 3
   script: {{ PYTHON }} -m pip install . -vv
+  noarch: python
 
 requirements:
   host:
     - pip
-    - python
+    - python >=3.8
   run:
-    - ansicon  # [win]
-    - python
+    - __{{ target_os }}
+    {% if target_os == 'win' %}
+    - ansicon
+    {% endif %}
+    - python >=3.8
 
 test:
   imports:
@@ -40,3 +44,4 @@ about:
 extra:
   recipe-maintainers:
     - hadim
+    - mattip
