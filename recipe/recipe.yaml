@@ -39,6 +39,15 @@ tests:
       python_version:
         - ${{ python_min }}.*
         - "*"
+  - script:
+      - pytest
+    requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+        - terminals.toml
 
 about:
   summary: Jinxed Terminal Library
