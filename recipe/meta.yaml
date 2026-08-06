@@ -22,10 +22,9 @@ requirements:
     - setuptools
     - wheel
   run:
-    - __{{ target_os }}
-    {% if target_os == 'win' %}
-    - ansicon
-    {% endif %}
+    - __unix   # [unix]
+    - __win    # [win]
+    - ansicon  # [win]
     - python >=3.8
 
 test:
