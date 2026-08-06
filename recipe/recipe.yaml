@@ -1,36 +1,34 @@
 schema_version: 1
 
 context:
-  name: jinxed
   version: "2.1.0"
 
 package:
-  name: ${{ name|lower }}
+  name: jinxed
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/j/jinxed/jinxed-${{ version }}.tar.gz
   sha256: 7e755b831faa2443d44fb4ce7c0202eb9c3ed39bd5bf1193365888f4f6092b54
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - pip
     - python ${{ python_min }}.*
+    - pip
     - setuptools
-    - wheel
   run:
+    - python >=${{ python_min }}
     - if: win
       then:
         - __win
         - ansicon
       else:
         - __unix
-    - python >=${{ python_min }}
 
 tests:
   - python:
@@ -44,9 +42,11 @@ tests:
 
 about:
   summary: Jinxed Terminal Library
-  license: MPL-2.0
-  license_file: LICENSE
-  homepage: https://pypi.org/project/jinxed/
+  license: MPL-2.0 AND MIT
+  license_file:
+    - LICENSE.ncurses
+    - LICENSE
+  homepage: https://github.com/Rockhopper-Technologies/jinxed
 
 extra:
   recipe-maintainers:
