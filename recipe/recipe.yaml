@@ -1,0 +1,63 @@
+schema_version: 1
+
+context:
+  version: "2.1.0"
+
+package:
+  name: jinxed
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/j/jinxed/jinxed-${{ version }}.tar.gz
+  sha256: 7e755b831faa2443d44fb4ce7c0202eb9c3ed39bd5bf1193365888f4f6092b54
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - if: win
+      then:
+        - __win
+        - ansicon
+      else:
+        - __unix
+
+tests:
+  - python:
+      imports:
+        - jinxed
+        - jinxed.terminfo
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - script:
+      - pytest
+    requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+        - terminals.toml
+
+about:
+  summary: Jinxed Terminal Library
+  license: MPL-2.0 AND MIT
+  license_file:
+    - LICENSE.ncurses
+    - LICENSE
+  homepage: https://github.com/Rockhopper-Technologies/jinxed
+
+extra:
+  recipe-maintainers:
+    - mattip
+    - mgorny
